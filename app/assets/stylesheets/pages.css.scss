@@ -25,7 +25,8 @@ $blue: #08C;
 
 
 h2{
-	margin-bottom: 30px;
+	margin-top: 10px;
+	margin-bottom: 20px;
 	color: $blue;
 }
 	
@@ -42,4 +43,20 @@ h2{
 
 .center{
 	text-align: center;
+}
+
+.hero-unit{
+	h1{
+		line-height: 1.2;
+	}
+	img{
+		float: left;
+		margin-right: 50px;
+	}
+}
+
+#what{
+	img{
+		margin: 20px 0;
+	}
 }

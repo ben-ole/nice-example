@@ -1,5 +1,6 @@
 %header
 	.hero-unit
+		=image_tag "logo.png", :width => "150px"
 		%h1 Nice State Engine
 		%p A Ruby on Rails framework to create robust AJAX driven webpages.
 		%p
@@ -13,30 +14,21 @@
 		%li= link_to "Example", a_basic_index_path
 		
 %hr.soften
-
-#what
-
-	.row
-		%p.lead.span10.offset1.center
-			Nice is a light-weight engine that puts some magic into JS/AJAX driven Rails pages with the aim to ease the development of rich and interactive restful web applications while improving the robustness at the sametime.
-	
-	.row
-
-		.span7
-			=image_tag "nice_pattern.png"
-						
-		.span4.offset1
-			%h6 1. Page Request 
-			%p The user triggers a page request either HTML or JS when he is already on the site.
+.row
+	%p.lead.span10.offset1.center
+		Nice is a light-weight engine that puts some magic into JS/AJAX driven Ruby on Rails pages with the aim to ease the development of rich and interactive restful web applications while improving the robustness at the same time.
 		
-			%h6 1. Page Request 
-			%p The user triggers a page request either HTML or JS when he is already on the site.
-			
-			%h6 1. Page Request 
-			%p The user triggers a page request either HTML or JS when he is already on the site.
-			
-			%h6 1. Page Request 
-			%p The user triggers a page request either HTML or JS when he is already on the site.								
+#what
+	.row
+		.offset1.span5.center
+			%h1 Instead Of
+			=image_tag "whynice1.png"
+			%p.lead JS State-to-State Transition Code
+		
+		.span5.center
+			%h1 Go For NICE
+			=image_tag "whynice2.png"
+			%p.lead Smart HTML5 Annotations
 
 #features
 	%h2 Features
@@ -100,6 +92,36 @@
 		The idea is about state defintions as they are known in Adobe Flex for a while which represent one visiual status displayed to the user. In response to an event (typically user interaction), this state can change. Think of page states as of one visual view presented to the user - or for RESTful applications, one state is tied to one route. While plain HTML requires a page refresh to update the visual presentation, Javascript introduced a possiblity to define a transitition to the next state by adding or removing elements on the fly. Although this is an enhancement with regards to user experience, but the source code gets messed up easily, because the view will be generated both on the server and dynamically in the browser. Furthermore rendering code will be written twice and we all know that this leads to incoherence. Finally, the idea of Nice is to put the view generation entirely on the backend side (where it should be for several reasons!) and let the state transitions happen auto-magically. Instead of coding the changes between different states you will simply code your states by annotating which page elements belong to which state and Nice generates the glue code to transit between states - no matter how many states you have. Specially if you consider having multiple states you have to write a lot of code in plain javascript to handle all possible state changes, Nice can handle this easily and consistently.
 		The whole framework is aimed to be non-intrusive as much as possible, so the way you regulary write your rails apps won't change dramatically.
 		
+#scenario
+	
+	%h2 Scenario
+
+	.row
+
+		.span7
+			=image_tag "nice_pattern.png"
+
+		.span4.offset1
+			%h6 1. Starting Position
+			%p The user comes to your page either directly or via an external link.
+			%p In both cases your server gets a plain <em>HTML</em> request which will be handled as usual by your rails application. 
+
+			%h6 2. NICE Interception
+			%p <strong>NICE</strong> requires you to include several views in one layout which is why the previously generated HTML file is not correct.
+			%p At this point, the <strong>NICE</strong> middleware will intercept the request and parse the rendered HTML file. In result, all elements originally not included in this step will be removed and the resulting HTML response forwarded to the client.
+
+			%h6 3. Client Side
+			%p The user receives the page as normal and get can start to browse. If he hits one of the internal links another page request will be triggered. Since we want to enhance the user experience, only the differing part of the page should change in result. This is why the request should be AJAX.
+
+			%h6 4. Page Rendering
+			%p Like in step 1, the resulting page will be rendered as it was a HTML request. The response will be almost the same as in step 1 except the view specific renderings included.
+			%h6 5. NICE Interception
+			%p Since the user made an AJAX call instead of HTML, <strong>NICE</strong> will know to intercept differently than in step 2 this time. 
+			%p <strong>NICE</strong> generates JS code which will insert the state specific elements rendered in step 4 and send this back to the client.
+
+			%h6 6. Client Execution
+			%p The response will be executed at client side and do the DOM manipulation required to change to the appropriate the state.		
+		
 #start
 
 	%h2 Getting Started
@@ -107,4 +129,14 @@
 	%p< 
 		The project is hosted on 
 		=link_to "Github.","https://github.com/elchbenny/nice"
-		I suggest cloning or downloading the project as this website is also included in the <code>test/example</code> directory which may be a good starting point. Hava a look at the <em>basic</em> controller and views to get an idea on how to work with the Nice State Engine.
+		I suggest cloning or downloading the example-project from 
+		=link_to "here", "https://github.com/elchbenny/nice-example" 
+		which may be a good starting point. Have a look at the <em>basic</em> controller and views to get an idea on how to work with the Nice State Engine.
+		
+#license
+
+	%h2 License and Contribution
+
+	%p< 
+		The project is under MIT License.
+	%p< Contribution is very welcome on Github. Feel free to contact me over there as well.
