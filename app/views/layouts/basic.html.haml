@@ -1,3 +1,4 @@
+
 - content_for :content do
 	.row
 		.span8
@@ -16,10 +17,13 @@
 
 	.row
 		.span4
-			.hero-unit
-				%h1{"data-state" => "get_basic_a", "data-state-transition" => "nice.transitions.fade_slow"} <small>State</small> A
-				%h1{"data-state" => "get_basic_b"} <small>State</small> B
-				%h1{"data-state" => "get_basic_c"} <small>State</small> C
+			.hero-unit{"data-state" => "get_basic_a", "data-state-transition" => "fade_slow"}
+				%h1 <small>State</small> A
+			.hero-unit{"data-state" => "get_basic_b", "data-state-transition" => "none"}	
+				%h1 <small>State</small> B
+			.hero-unit{"data-state" => "get_basic_c", "data-state-transition" => "none"}
+				.test{"data-state" => "get_basic_c", "data-state-transition" => "slide_top"}
+					%h1 <small>State</small> C
 
 		.span4
 			.hero-unit{"data-state" => "get_basic_a get_basic_b"}
