@@ -5,4 +5,8 @@
 .hero-unit.special{
 	height: 72px;
 	overflow: hidden;
+	
+	.drop{
+		position: relative;
+	}
 }
