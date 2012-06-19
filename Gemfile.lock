@@ -1,3 +1,10 @@
+PATH
+  remote: ../nice/
+  specs:
+    nice (0.0.4)
+      nokogiri
+      rails (~> 3.2.3)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -73,9 +80,6 @@ GEM
     net-ssh (2.5.2)
     net-ssh-gateway (1.1.0)
       net-ssh (>= 1.99.1)
-    nice (0.0.4)
-      nokogiri
-      rails (~> 3.2.3)
     nokogiri (1.5.4)
     polyglot (0.3.3)
     rack (1.4.1)
@@ -131,7 +135,7 @@ DEPENDENCIES
   coffee-rails (~> 3.2.1)
   haml-rails
   jquery-rails
-  nice (>= 0.0.4)
+  nice!
   rails (= 3.2.3)
   sass-rails (~> 3.2.3)
   sqlite3

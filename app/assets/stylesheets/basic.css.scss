@@ -10,3 +10,21 @@
 		position: relative;
 	}
 }
+
+.state-get_basic_a{
+	.set2, .set3{
+		opacity: 0.4;
+	}
+}
+
+.state-get_basic_b{
+	.set1, .set3{
+		opacity: 0.4;
+	}
+}
+
+.state-get_basic_c{
+	.set1, .set2{
+		opacity: 0.4;
+	}
+}

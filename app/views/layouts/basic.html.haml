@@ -36,7 +36,7 @@
 				= yield(:container1) 
 
 	.row
-		.span4
+		.span4.set1
 			%h2 Single State Component
 
 			%pre.prettyprint.lang-haml
@@ -50,7 +50,7 @@
 				As you can see - the whole page stays the same while the content of the boxes above changes with a click on State A, State B, State C.
 
 
-		.span4
+		.span4.set2
 			%h2 Multi State Component
 
 			%pre.prettyprint.lang-haml
@@ -63,7 +63,7 @@
 				%i layouts/basic.html.haml  
 				only once. This technique avoids replication of the same code and offers the ability to leave state components untouched even when the state is changing.
 
-		.span4
+		.span4.set3
 			%h2 Multi State <small>with updates</small>
 
 			%pre.prettyprint.lang-haml
