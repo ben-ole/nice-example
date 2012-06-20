@@ -1,86 +1,323 @@
 
 - content_for :content do
+	
+	.subnav
+		.btn-group.right{"data-toggle" => "buttons-radio"}
+			= link_to "State A", a_basic_index_path, :remote => :true, :class => "btn btn-primary btn-large #{current_page?(a_basic_index_path) ? 'active' : ''}"
+			= link_to "State B", b_basic_index_path, :remote => :true, :class => "btn btn-primary btn-large #{current_page?(b_basic_index_path) ? 'active' : ''}"
+			= link_to "State C", c_basic_index_path, :remote => :true, :class => "btn btn-primary btn-large #{current_page?(c_basic_index_path) ? 'active' : ''}"
+
 	.row
 		.span8
-			%h1 Basic State Desgin <small>Click the buttons to change the state.</small>
-
-		.span4
-			.btn-group.subnav.right{"data-toggle" => "buttons-radio"}
-				= link_to "State A", a_basic_index_path, :remote => :true, :class => "btn btn-primary btn-large #{current_page?(a_basic_index_path) ? 'active' : ''}"
-				= link_to "State B", b_basic_index_path, :remote => :true, :class => "btn btn-primary btn-large #{current_page?(b_basic_index_path) ? 'active' : ''}"
-				= link_to "State C", c_basic_index_path, :remote => :true, :class => "btn btn-primary btn-large #{current_page?(c_basic_index_path) ? 'active' : ''}"
+			%h1 Example Code <small>Click the buttons to change the state.</small>
 
 	.row
-		.span10
-			%p
-				The three boxes below demonstrate the use of multiple states within one page. All updates are loaded via AJAX and the main page stays untouched. The corresponding code shows how easy states can be implemented.
+		.span12
+			%h2 1. Elements dedicated to a single state
+			
+			%p 
+				The following boxes are tied to only one state. The source-code below shows how simple this is to achieve: You can just put a HTML5 data attribute namely <code>data-state</code> with the value of a state name. 
+			.alert.alert-box	
+				The state name is composed by the following rule: <strong>{action [get|post|put|update|delete]}_{controller_name}_{action}</strong>
+				%br 
+				For example: <code>get_books_show</code>
 
 	.row
 		.span4
-			.hero-unit{"data-state" => "get_basic_a", "data-state-transition" => "fade_slow"}
+			.hero-unit{"data-state" => "get_basic_a"}
 				%h1 <small>State</small> A
-			.hero-unit{"data-state" => "get_basic_b", "data-state-transition" => "none"}	
+		.span4
+			.hero-unit{"data-state" => "get_basic_b"}	
 				%h1 <small>State</small> B
-			.hero-unit.special{"data-state" => "get_basic_c", "data-state-transition" => "none"}
-				.drop{"data-state-transition" => "slide_top"}
-					%h1 <small>State</small> C
+		.span4
+			.hero-unit{"data-state" => "get_basic_c"}
+				%h1 <small>State</small> C
+				
+	.row
+		.span12
+			%code.as-ref Source Code | HAML Lang | app/views/layouts/{controller}.html.haml
+			%pre.prettyprint.lang-haml
+				= preserve do
+					:escaped
+						.hero-unit{"data-state" => "get_basic_a"} 
+							%h1  <small>State</small> A
+						.hero-unit{"data-state" => "get_basic_b"} 
+							%h1  <small>State</small> B
+						.hero-unit{"data-state" => "get_basic_c"} 
+							%h1  <small>State</small> C
 
+	-# ----------------------------------------------------------------------------------------
+
+	.row
+		.span12
+			%h2 2. Events bind to multiple states
+			
+			%p 
+				The following examples demonstrates how you can bind an element to multiple states easily. A simple real-life example would be an index-list which you will show in your index and show action, but not in the update, destroy etc. views.
+				<br>
+				You can achieve this by simply providing more than one state name space-separated to the <code>data-state</code> data attribute.
+
+	.row
 		.span4
 			.hero-unit{"data-state" => "get_basic_a get_basic_b"}
-				%h1 <small>State</small> A+B
+				%h1 <small>State</small> A+B 
+				%p 
+					= yield(:container1)
+		.span4
+			.hero-unit{"data-state" => "get_basic_a get_basic_b get_basic_c"}	
+				%h1 <small>State</small> A+B+C
+				%p 
+					= yield(:container1)
+		.span4
+			.hero-unit{"data-state" => "get_basic_b get_basic_c"}
+				%h1 <small>State</small> B+C
+				%p 
+					= yield(:container1)
+				
+	.row
+		.span12
+			%code.as-ref Source Code | HAML Lang | app/views/layouts/{controller}.html.haml
+			%pre.prettyprint.lang-haml
+				= preserve do			
+					:escaped
+						.hero-unit{"data-state" => "get_basic_a get_basic_b"}
+							%h1 <small>State</small> A+B 
+							%p 
+								= yield(:container1)
+								
+						.hero-unit{"data-state" => "get_basic_a get_basic_b get_basic_c"}	
+							%h1 <small>State</small> A+B+C
+							%p 
+								= yield(:container1)
+								
+						.hero-unit{"data-state" => "get_basic_b get_basic_c"}
+							%h1 <small>State</small> B+C
+							%p 
+								= yield(:container1)
+						
+						
+	-# ----------------------------------------------------------------------------------------
+	
+	.row
+		.span12
+			%h2 3. Leaving elements untouched even they belong to multiple states
+			
+			%p 
+				The example above demonstrates the use of elements in multiple states. But what if you want to have your controls belonging to multiple states, but you do not want to reload them when the state is changing to another state where they are still included? <strong>NICE</strong> helps you with another HTML5 data attribute called <code>data-state-update</code> which value can be either <code>yes</code> which is the default, or <code>no</code>.
+	
+	.row
+		.span4
+			.hero-unit{"data-state" => "get_basic_a get_basic_b", "data-state-update" => "no"}
+				%h1 <small>State</small> A+B 
+				%p 
+					= yield(:container1)
+		.span4
+			.hero-unit{"data-state" => "get_basic_a get_basic_b get_basic_c"}	
+				%h1 <small>State</small> A+B+C
+				%p 
+					= yield(:container1)
+		.span4
+			.hero-unit{"data-state" => "get_basic_b get_basic_c"}
+				%h1 <small>State</small> B+C
+				%p 
+					= yield(:container1)
+				
+	.row
+		.span12
+			%code.as-ref Source Code | HAML Lang | app/views/layouts/{controller}.html.haml
+			%pre.prettyprint.lang-haml
+				= preserve do			
+					:escaped
+						.hero-unit{"data-state" => "get_basic_a get_basic_b", "data-state-update" => "no"}
+							%h1 <small>State</small> A+B 
+							%p 
+								= yield(:container1)
 
-		.span4{"data-state" => "get_basic_a get_basic_b", "data-state-update" => :yes}
-			.hero-unit
-				%h1 <small>State</small> A+B
-			.alert.alert-info
-				= yield(:container1) 
+													
+						.hero-unit{"data-state" => "get_basic_a get_basic_b get_basic_c", "data-state-update" => "no"}	
+							%h1 <small>State</small> A+B+C
+							%p 
+								= yield(:container1)
+								
+						.hero-unit{"data-state" => "get_basic_b get_basic_c", "data-state-update" => "no"}
+							%h1 <small>State</small> B+C
+							%p 
+								= yield(:container1)
+						
+						
+	-# ----------------------------------------------------------------------------------------	
+	
+	.row
+		.span12
+			%h2 4. Browser History Management
+			
+			%p 
+				Since <strong>NICE</strong> will take care of the routes to be compliant with the current state while respecting the REST guidelines, there is nothing you have to take care of. Have a look to your browser's address line while you click on the different state buttons and see how it changes. Even more important, if you bookmark the URL and open it somewhere later the window will look exactly the same which is the main advantage of using <strong>NICE</strong> - there is simply no difference if your view was loaded by AJAX or HTML.
+
+	-# ----------------------------------------------------------------------------------------	
 
 	.row
-		.span4.set1
-			%h2 Single State Component
+		.span12
+			%h2 5. CSS class per state
 
+			%p 
+				<strong>NICE</strong> automatically assigns a CSS class depending on the current state to the body element of the current page. This allows you to easily apply different styles to any elements on the page when the state is changing.
+				%br				
+				The following example demonstrates this use by changing the background-color of an element. Notice: It doesn't matter, whether this element is part of a data-state block or not.
+			.alert.alert-box
+				The class name is based on the following rule:
+				%strong state-{state_name}
+
+	.row
+		.span4
+			.hero-unit.special
+				%p State dependent style
+
+	.row
+		.span12
+			%code.as-ref Source Code | SASS Lang | app/assets/stylesheets/{controller}.css.scss
+			%pre.prettyprint.lang-css
+				= preserve do			
+					:escaped
+						.state-get_basic_a .hero-unit.special{
+							background-color: lightgreen;
+						}
+
+						.state-get_basic_b .hero-unit.special{
+							background-color: pink;
+						}
+
+						.state-get_basic_c .hero-unit.special{
+							background-color: lightblue;
+						}
+						
+	-# ----------------------------------------------------------------------------------------	
+
+	.row
+		.span12
+			%h2 6. Transitions
+			
+			%p There are two basic approaches to apply your stunning animations when the state is changing: JS and CSS3. Although I recommend using CSS3, I've implemented basic support for JQuery, which you may like to use.
+			
+	.row
+		.span12
+			%h3 6.1 CSS3 Transitions
+			
+	.row
+		.span4
+			.hero-unit.fade-in{"data-state" => "get_basic_a"}
+				%h1 <small>State</small> A
+		.span4
+			.hero-unit{"data-state" => "get_basic_b"}	
+				%h1.drop-in <small>State</small> B
+		.span4
+			.hero-unit.rotate-in{"data-state" => "get_basic_c"}
+				%h1 <small>State</small> C			
+				
+	.row
+		.span12
+			%code.as-ref Source Code | SASS Lang | app/assets/stylesheets/{controller}.css.scss
+			%pre.prettyprint.lang-css
+				= preserve do			
+					:escaped
+						// For brevity - showing only -webkit styles
+						
+						@-webkit-keyframes dropIn {
+							from {top: -130px;}
+							to {top: 0px;}
+						}
+
+						.drop-in{
+							position: relative;
+
+							-webkit-animation: dropIn 1s; /* Safari and Chrome */
+							-webkit-animation-timing-function: ease-out;
+						}
+
+						@-webkit-keyframes fadeIn {
+							from {opacity: 0;}
+							to {opacity: 1.0;}	
+						}
+
+						.fade-in{
+							-webkit-animation: fadeIn 1s; /* Safari and Chrome */
+							-webkit-animation-timing-function: ease-out;	
+						}
+
+						@-webkit-keyframes rotateIn {
+							from {
+								-webkit-transform: scale(0.1,0.1) rotate(0deg);
+						    }
+							to {
+								-webkit-transform: scale(1.0,1.0) rotate(360deg);		
+							}
+						}
+
+						.rotate-in{
+							-webkit-animation:rotateIn 1s; /* Safari and Chrome */
+							-webkit-animation-timing-function: ease-out;	
+						}
+				
+			
+	.row
+		.span12
+			%h3 6.2 JS Transitions
+			
+			%p 
+				Since CSS3 transitions are a little bit complex to getting started with and even not supported on IE, the following example will help you to get up and running with JQuery powered animations.
+				%br
+				You need to provide a configuration file, if you need something else than the default 0.2s linear fade-in.			
+			
+	.row
+		.span4
+			.hero-unit{"data-state" => "get_basic_a", "data-state-transition" => "default"}
+				%h1 <small>State</small> A
+		.span4
+			.hero-unit{"data-state" => "get_basic_b"}	
+				%h1{"data-state-transition" => "fade_slow"} <small>State</small> B
+		.span4
+			.hero-unit{"data-state" => "get_basic_c"}
+				%h1{"data-state-transition" => "slide_top"} <small>State</small> C			
+				
+	.row
+		.span12
+			%code.as-ref Source Code | Coffeescript Lang | app/assets/javascripts/nice-transitions.js.coffee
+			%pre.prettyprint.lang-coffee
+				= preserve do			
+					:escaped
+						class this.NiceTransitions
+							# override default
+							@default = 
+								duration: 1000
+								easing: "linear"
+								properties:
+									opacity: 0.0
+
+							@fade_slow = 
+								duration: 2000
+								easing: "linear"			
+								properties:
+									opacity: 0.0
+
+							@slide_top =
+								duration: 3000
+								easing: "linear"			
+								properties:
+									"top": "-200px"
+									
+	.row
+		.span12
+			%code.as-ref Source Code |  HAML Lang | app/views/layouts/{controller}.html.haml
 			%pre.prettyprint.lang-haml
-				:escaped
-					.hero-unit
-					  %h1{"data-state" => "get_basic_a"} A
-					  %h1{"data-state" => "get_basic_b"} B
-					  %h1{"data-state" => "get_basic_c"} C
-
-			%p
-				As you can see - the whole page stays the same while the content of the boxes above changes with a click on State A, State B, State C.
-
-
-		.span4.set2
-			%h2 Multi State Component
-
-			%pre.prettyprint.lang-haml
-				:escaped
-					.hero-unit{"data-state" => "get_basic_a get_basic_b"}
-					  %h1 State A + B
-
-			%p
-				The box above is owned by state A and B and not included in state C. The definition of this component is implemented in the 
-				%i layouts/basic.html.haml  
-				only once. This technique avoids replication of the same code and offers the ability to leave state components untouched even when the state is changing.
-
-		.span4.set3
-			%h2 Multi State <small>with updates</small>
-
-			%pre.prettyprint.lang-haml
-				:escaped
-					- content_for :container1 do
-					  = "Time: \#{Time.now.asctime}"
-
-			%pre.prettyprint.lang-haml
-				:escaped
-					.alert.alert-info{"data-state" => "get_basic_a get_basic_b", "data-state-update" => :yes}
-					  = yield(:container1)
-
-			%p
-				In case the component contains something which needs to be updated on state transition, you can put
-				%code data-state-update => :yes
-				attribute. This will reload the component on every state transition as you can see on the time stamp below.
-
-		
+				= preserve do			
+					:escaped
+						.hero-unit{"data-state" => "get_basic_a", "data-state-transition" => "default"}
+							%h1 <small>State</small> A
+							
+						.hero-unit{"data-state" => "get_basic_b"}	
+							%h1{"data-state-transition" => "fade_slow"} <small>State</small> B
+							
+						.hero-unit{"data-state" => "get_basic_c"}
+							%h1{"data-state-transition" => "slide_top"} <small>State</small> C								
 
 = render :template => 'layouts/application'

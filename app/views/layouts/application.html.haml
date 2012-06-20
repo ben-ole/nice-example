@@ -14,9 +14,7 @@
 							= link_to "/" do
 								%i.icon-home.icon-white							
 								Overview
-						%li= link_to "Basic Example", a_basic_index_path
-						%li= link_to "State Transitions", "#"
-						%li= link_to "RESTful Resource", books_path
+						%li= link_to "Examples", a_basic_index_path
 		.container
 			\#{content_for?(:content) ? yield(:content) : yield}
 

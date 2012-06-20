@@ -2,29 +2,124 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.hero-unit.special{
-	height: 72px;
-	overflow: hidden;
+// Source code block styling
+code.as-ref{
+	border-color: #888888;
 	
-	.drop{
-		position: relative;
+	-webkit-border-radius: 0;		
+	-webkit-border-top-left-radius: 4px;
+	-webkit-border-top-right-radius: 4px;
+	-moz-border-radius: 0;	
+	-moz-border-radius-topleft: 4px;
+	-moz-border-radius-topright: 4px;
+	border-top-left-radius: 4px;
+	border-top-right-radius: 4px;
+}
+
+pre.prettyprint{
+	-webkit-border-radius: 4px;
+	-webkit-border-top-left-radius: 0;
+	-moz-border-radius: 4px;
+	-moz-border-radius-topleft: 0;
+	border-radius: 4px;
+	border-top-left-radius: 0;
+}
+
+// sub navigation fix
+.container .subnav{
+	width: 940px;
+	margin: 0 auto;
+}
+
+.container .subnav-fixed {
+	position: fixed;
+	top: 40px;
+	
+	.btn:first-child{
+		-webkit-border-radius: 0;		
+		-webkit-border-bottom-left-radius: 4px;
+		-moz-border-radius: 0;	
+		-moz-border-radius-bottomleft: 4px;
+		border-bottom-left-radius: 4px; }
+		
+	.btn:last-child{
+		-webkit-border-radius: 0;
+		-webkit-border-bottom-right-radius: 4px;
+		-moz-border-radius: 0;	
+		-moz-border-radius-bottomright: 4px;
+		border-bottom-right-radius: 4px; }		
+}
+
+// bootstrap layout overrides
+.container{
+	.span4{
+		min-height: 1px;	// let it always take place, even if it's empty
+	}
+	.hero-unit{ 	
+		overflow: hidden;
+			
+		h1{
+			font-size: 40px;
+		}
+	}
+	
+	h2{
+		font-size: 18px;
+		margin-bottom: 0;
 	}
 }
 
-.state-get_basic_a{
-	.set2, .set3{
-		opacity: 0.4;
+// State specific styles
+
+.state-get_basic_a .hero-unit.special{
+	background-color: lightgreen;
+}
+
+.state-get_basic_b .hero-unit.special{
+	background-color: pink;
+}
+
+.state-get_basic_c .hero-unit.special{
+	background-color: lightblue;
+}
+
+// transitions
+@-webkit-keyframes dropIn {
+	from {top: -130px;}
+	to {top: 0px;}
+}
+
+.drop-in{
+	position: relative;
+	
+	-webkit-animation: dropIn 1s; /* Safari and Chrome */
+	-webkit-animation-timing-function: ease-out;
+}
+
+@-webkit-keyframes fadeIn {
+	from {opacity: 0;}
+	to {opacity: 1.0;}	
+}
+
+.fade-in{
+	-webkit-animation: fadeIn 1s; /* Safari and Chrome */
+	-webkit-animation-timing-function: ease-out;	
+}
+
+@-webkit-keyframes rotateIn {
+	from {
+	  	-moz-transform: scale(0.1,0.1) rotate(0deg);
+	  	-o-transform: scale(0.1,0.1) rotate(0deg);		
+		-webkit-transform: scale(0.1,0.1) rotate(0deg);
+    }
+	to {
+	  	-moz-transform: scale(1.0,1.0) rotate(360deg);
+	  	-o-transform: scale(1.0,1.0) rotate(360deg);			
+		-webkit-transform: scale(1.0,1.0) rotate(360deg);		
 	}
 }
 
-.state-get_basic_b{
-	.set1, .set3{
-		opacity: 0.4;
-	}
-}
-
-.state-get_basic_c{
-	.set1, .set2{
-		opacity: 0.4;
-	}
+.rotate-in{
+	-webkit-animation:rotateIn 1s; /* Safari and Chrome */
+	-webkit-animation-timing-function: ease-out;	
 }

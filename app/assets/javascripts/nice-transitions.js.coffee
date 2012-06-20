@@ -14,7 +14,7 @@ class this.NiceTransitions
 			opacity: 0.0
 			
 	@slide_top =
-		duration: 1000
-		easing: "swing"			
+		duration: 3000
+		easing: "linear"			
 		properties:
 			"top": "-200px"

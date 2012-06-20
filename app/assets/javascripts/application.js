@@ -18,5 +18,21 @@
 
 $().ready(function(){
 	prettyPrint();
-	$('.nav-tabs').button()
+	$('.nav-tabs').button();
+	
+	var $win = $(window)
+	      , navTop = $('.subnav').length && $('.subnav').offset().top - 40
+	      , isFixed = 0;
+	
+	$win.on('scroll', function () {
+	      var i, scrollTop = $win.scrollTop();
+	
+	      if (scrollTop >= navTop && !isFixed) {
+	        isFixed = 1
+	        $(".subnav").addClass('subnav-fixed')
+	      } else if (scrollTop <= navTop && isFixed) {
+	        isFixed = 0
+	        $(".subnav").removeClass('subnav-fixed')
+	      }
+	    });
 });
