@@ -71,20 +71,35 @@ pre.prettyprint{
 
 // State specific styles
 
-.state-get_basic_a .hero-unit.special{
+.state-a .hero-unit.special{
 	background-color: lightgreen;
 }
 
-.state-get_basic_b .hero-unit.special{
+.state-b .hero-unit.special{
 	background-color: pink;
 }
 
-.state-get_basic_c .hero-unit.special{
+.state-c .hero-unit.special{
 	background-color: lightblue;
 }
 
 // transitions
+@-keyframes dropIn {
+	from {top: -130px;}
+	to {top: 0px;}
+}
+
 @-webkit-keyframes dropIn {
+	from {top: -130px;}
+	to {top: 0px;}
+}
+
+@-moz-keyframes dropIn {
+	from {top: -130px;}
+	to {top: 0px;}
+}
+
+@-o-keyframes dropIn {
 	from {top: -130px;}
 	to {top: 0px;}
 }
@@ -92,34 +107,99 @@ pre.prettyprint{
 .drop-in{
 	position: relative;
 	
-	-webkit-animation: dropIn 1s; /* Safari and Chrome */
+	-animation: dropIn 1s;
+	-animation-timing-function: ease-out;
+	
+	-webkit-animation: dropIn 1s;
 	-webkit-animation-timing-function: ease-out;
+	
+	-moz-animation: dropIn 1s;
+	-moz-animation-timing-function: ease-out;
+	
+	-o-animation: dropIn 1s;
+	-o-animation-timing-function: ease-out;		
 }
 
-@-webkit-keyframes fadeIn {
+@-keyframes fadeIn{
+	from {opacity: 0;}
+	to {opacity: 1.0;}	
+}
+
+@-webkit-keyframes fadeIn{
+	from {opacity: 0;}
+	to {opacity: 1.0;}	
+}
+
+@-moz-keyframes fadeIn{
+	from {opacity: 0;}
+	to {opacity: 1.0;}	
+}
+
+@-o-keyframes fadeIn{
 	from {opacity: 0;}
 	to {opacity: 1.0;}	
 }
 
 .fade-in{
-	-webkit-animation: fadeIn 1s; /* Safari and Chrome */
-	-webkit-animation-timing-function: ease-out;	
+	-animation: fadeIn 1s;
+	-animation-timing-function: ease-out;	
+	
+	-webkit-animation: fadeIn 1s;
+	-webkit-animation-timing-function: ease-out;
+	
+	-moz-animation: fadeIn 1s;
+	-moz-animation-timing-function: ease-out;
+	
+	-o-animation: fadeIn 1s;
+	-o-animation-timing-function: ease-out;			
 }
 
-@-webkit-keyframes rotateIn {
+@-keyframes rotateIn{
 	from {
-	  	-moz-transform: scale(0.1,0.1) rotate(0deg);
-	  	-o-transform: scale(0.1,0.1) rotate(0deg);		
+		-transform: scale(0.1,0.1) rotate(0deg);
+    }
+	to {
+	  	-transform: scale(1.0,1.0) rotate(360deg);
+	}
+}
+
+@-webkit-keyframes rotateIn{
+	from {
 		-webkit-transform: scale(0.1,0.1) rotate(0deg);
     }
 	to {
-	  	-moz-transform: scale(1.0,1.0) rotate(360deg);
-	  	-o-transform: scale(1.0,1.0) rotate(360deg);			
 		-webkit-transform: scale(1.0,1.0) rotate(360deg);		
 	}
 }
 
+@-moz-keyframes rotateIn{
+	from {
+	  	-moz-transform: scale(0.1,0.1) rotate(0deg);
+    }
+	to {
+	  	-moz-transform: scale(1.0,1.0) rotate(360deg);
+	}
+}
+
+@-o-keyframes rotateIn{
+	from {
+	  	-o-transform: scale(0.1,0.1) rotate(0deg);		
+    }
+	to {
+	  	-o-transform: scale(1.0,1.0) rotate(360deg);
+	}
+}
+
 .rotate-in{
-	-webkit-animation:rotateIn 1s; /* Safari and Chrome */
+	-animation:rotateIn 1s;
+	-animation-timing-function: ease-out;	
+	
+	-webkit-animation:rotateIn 1s;
 	-webkit-animation-timing-function: ease-out;	
+
+	-moz-animation:rotateIn 1s;
+	-moz-animation-timing-function: ease-out;	
+
+	-o-animation:rotateIn 1s;
+	-o-animation-timing-function: ease-out;		
 }

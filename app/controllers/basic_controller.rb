@@ -1,6 +1,5 @@
 class BasicController < ApplicationController
   def a
-
   end
 
   def b

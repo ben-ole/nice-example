@@ -7,8 +7,8 @@ gem 'rails', '3.2.3'
 
 gem 'sqlite3'
 
-gem 'nice', '>= 0.0.5', :groups => :production
-#gem 'nice', :path => '../nice/', :groups => :development
+#gem 'nice', '>= 0.0.5', :groups => :production
+gem 'nice', :path => '../nice/', :groups => :development
 
 # eyes - friendly
 #gem "twitter-bootstrap-rails", :git => "git://github.com/elchbenny/twitter-bootstrap-rails.git", :branch => "static"

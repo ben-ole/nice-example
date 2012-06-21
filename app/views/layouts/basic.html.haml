@@ -17,20 +17,20 @@
 			
 			%p 
 				The following boxes are tied to only one state. The source-code below shows how simple this is to achieve: You can just put a HTML5 data attribute namely <code>data-state</code> with the value of a state name. 
-			.alert.alert-box	
-				The state name is composed by the following rule: <strong>{action [get|post|put|update|delete]}_{controller_name}_{action}</strong>
-				%br 
-				For example: <code>get_books_show</code>
+			.alert.alert-box
+				The state name is the name of the called 
+				%strong controller action! 
+				For example: <code>index</code>
 
 	.row
 		.span4
-			.hero-unit{"data-state" => "get_basic_a"}
+			.hero-unit{"data-state" => "a"}
 				%h1 <small>State</small> A
 		.span4
-			.hero-unit{"data-state" => "get_basic_b"}	
+			.hero-unit{"data-state" => "b"}	
 				%h1 <small>State</small> B
 		.span4
-			.hero-unit{"data-state" => "get_basic_c"}
+			.hero-unit{"data-state" => "c"}
 				%h1 <small>State</small> C
 				
 	.row
@@ -39,11 +39,11 @@
 			%pre.prettyprint.lang-haml
 				= preserve do
 					:escaped
-						.hero-unit{"data-state" => "get_basic_a"} 
+						.hero-unit{"data-state" => "a"} 
 							%h1  <small>State</small> A
-						.hero-unit{"data-state" => "get_basic_b"} 
+						.hero-unit{"data-state" => "b"} 
 							%h1  <small>State</small> B
-						.hero-unit{"data-state" => "get_basic_c"} 
+						.hero-unit{"data-state" => "c"} 
 							%h1  <small>State</small> C
 
 	-# ----------------------------------------------------------------------------------------
@@ -59,17 +59,17 @@
 
 	.row
 		.span4
-			.hero-unit{"data-state" => "get_basic_a get_basic_b"}
+			.hero-unit{"data-state" => "a b"}
 				%h1 <small>State</small> A+B 
 				%p 
 					= yield(:container1)
 		.span4
-			.hero-unit{"data-state" => "get_basic_a get_basic_b get_basic_c"}	
+			.hero-unit{"data-state" => "a b c"}	
 				%h1 <small>State</small> A+B+C
 				%p 
 					= yield(:container1)
 		.span4
-			.hero-unit{"data-state" => "get_basic_b get_basic_c"}
+			.hero-unit{"data-state" => "b c"}
 				%h1 <small>State</small> B+C
 				%p 
 					= yield(:container1)
@@ -80,17 +80,17 @@
 			%pre.prettyprint.lang-haml
 				= preserve do			
 					:escaped
-						.hero-unit{"data-state" => "get_basic_a get_basic_b"}
+						.hero-unit{"data-state" => "a b"}
 							%h1 <small>State</small> A+B 
 							%p 
 								= yield(:container1)
 								
-						.hero-unit{"data-state" => "get_basic_a get_basic_b get_basic_c"}	
+						.hero-unit{"data-state" => "a b c"}	
 							%h1 <small>State</small> A+B+C
 							%p 
 								= yield(:container1)
 								
-						.hero-unit{"data-state" => "get_basic_b get_basic_c"}
+						.hero-unit{"data-state" => "b c"}
 							%h1 <small>State</small> B+C
 							%p 
 								= yield(:container1)
@@ -107,17 +107,17 @@
 	
 	.row
 		.span4
-			.hero-unit{"data-state" => "get_basic_a get_basic_b", "data-state-update" => "no"}
+			.hero-unit{"data-state" => "a b", "data-state-update" => "no"}
 				%h1 <small>State</small> A+B 
 				%p 
 					= yield(:container1)
 		.span4
-			.hero-unit{"data-state" => "get_basic_a get_basic_b get_basic_c"}	
+			.hero-unit{"data-state" => "a b c", "data-state-update" => "no"}	
 				%h1 <small>State</small> A+B+C
 				%p 
 					= yield(:container1)
 		.span4
-			.hero-unit{"data-state" => "get_basic_b get_basic_c"}
+			.hero-unit{"data-state" => "b c", "data-state-update" => "no"}
 				%h1 <small>State</small> B+C
 				%p 
 					= yield(:container1)
@@ -128,18 +128,18 @@
 			%pre.prettyprint.lang-haml
 				= preserve do			
 					:escaped
-						.hero-unit{"data-state" => "get_basic_a get_basic_b", "data-state-update" => "no"}
+						.hero-unit{"data-state" => "a b", "data-state-update" => "no"}
 							%h1 <small>State</small> A+B 
 							%p 
 								= yield(:container1)
 
 													
-						.hero-unit{"data-state" => "get_basic_a get_basic_b get_basic_c", "data-state-update" => "no"}	
+						.hero-unit{"data-state" => "a b c", "data-state-update" => "no"}	
 							%h1 <small>State</small> A+B+C
 							%p 
 								= yield(:container1)
 								
-						.hero-unit{"data-state" => "get_basic_b get_basic_c", "data-state-update" => "no"}
+						.hero-unit{"data-state" => "b c", "data-state-update" => "no"}
 							%h1 <small>State</small> B+C
 							%p 
 								= yield(:container1)
@@ -179,15 +179,15 @@
 			%pre.prettyprint.lang-css
 				= preserve do			
 					:escaped
-						.state-get_basic_a .hero-unit.special{
+						.state-a .hero-unit.special{
 							background-color: lightgreen;
 						}
 
-						.state-get_basic_b .hero-unit.special{
+						.state-b .hero-unit.special{
 							background-color: pink;
 						}
 
-						.state-get_basic_c .hero-unit.special{
+						.state-c .hero-unit.special{
 							background-color: lightblue;
 						}
 						
@@ -205,13 +205,13 @@
 			
 	.row
 		.span4
-			.hero-unit.fade-in{"data-state" => "get_basic_a"}
+			.hero-unit.fade-in{"data-state" => "a"}
 				%h1 <small>State</small> A
 		.span4
-			.hero-unit{"data-state" => "get_basic_b"}	
+			.hero-unit{"data-state" => "b"}	
 				%h1.drop-in <small>State</small> B
 		.span4
-			.hero-unit.rotate-in{"data-state" => "get_basic_c"}
+			.hero-unit.rotate-in{"data-state" => "c"}
 				%h1 <small>State</small> C			
 				
 	.row
@@ -270,13 +270,13 @@
 			
 	.row
 		.span4
-			.hero-unit{"data-state" => "get_basic_a", "data-state-transition" => "default"}
+			.hero-unit{"data-state" => "a", "data-state-transition" => "default"}
 				%h1 <small>State</small> A
 		.span4
-			.hero-unit{"data-state" => "get_basic_b"}	
+			.hero-unit{"data-state" => "b"}	
 				%h1{"data-state-transition" => "fade_slow"} <small>State</small> B
 		.span4
-			.hero-unit{"data-state" => "get_basic_c"}
+			.hero-unit{"data-state" => "c"}
 				%h1{"data-state-transition" => "slide_top"} <small>State</small> C			
 				
 	.row
@@ -311,13 +311,13 @@
 			%pre.prettyprint.lang-haml
 				= preserve do			
 					:escaped
-						.hero-unit{"data-state" => "get_basic_a", "data-state-transition" => "default"}
+						.hero-unit{"data-state" => "a", "data-state-transition" => "default"}
 							%h1 <small>State</small> A
 							
-						.hero-unit{"data-state" => "get_basic_b"}	
+						.hero-unit{"data-state" => "b"}	
 							%h1{"data-state-transition" => "fade_slow"} <small>State</small> B
 							
-						.hero-unit{"data-state" => "get_basic_c"}
+						.hero-unit{"data-state" => "c"}
 							%h1{"data-state-transition" => "slide_top"} <small>State</small> C								
 
 = render :template => 'layouts/application'
